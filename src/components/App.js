@@ -1,34 +1,62 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Home } from './Home';
+import { BrowserRouter,Switch, Route } from 'react-router-dom';
 import { NavMenu } from './NavMenu';
-import { NewQuestion } from './NewQuestion';
-import { LeaderBoard } from './LeaderBoard';
-import { Questions } from './Questions';
-import { Login } from './Login';
-import NotFoundPage from './NotFoundPage';
-
+// import Routes from './Routes';
+import { connect } from 'react-redux';
 import "rsuite/dist/rsuite.min.css";
+import { Component } from 'react';
+import LoadingBar from 'react-redux-loading-bar';
+import { handleInitData } from '../actions/shared';
+
+
+import Home  from './Home';
+import NewQuestion from './NewQuestion';
+import Logout from './Logout';
+// import { LeaderBoard } from './LeaderBoard';
+import Questions from './Questions';
+import Login from './Login';
+import NotFoundPage from './NotFoundPage';
 
 const styles = {
   padding: 20
 };
 
-function App() {
-  return (
-      <BrowserRouter>
-        <NavMenu />
-        <div style={styles}>
-          <Routes>
-            <Route path='/' exact element={ <Home /> } />
-            <Route path='/login' element={ <Login /> } />
-            <Route path='/add' element={ <NewQuestion /> } />
-            <Route path='/leaderboard' element={ <LeaderBoard />} />
-            <Route path='/questions/:id' element={ <Questions /> } />
-            <Route path="*" element={ <NotFoundPage /> }/>
-          </Routes>
-        </div>
-      </BrowserRouter>
-  );
+class App extends Component {
+
+  componentDidMount(){
+    this.props.dispatch(handleInitData());
+  }
+
+  render(){
+      return (
+
+        <BrowserRouter>
+          <LoadingBar />
+          <NavMenu />
+          <div style={styles}>
+            {
+              this.props.loading === true 
+                ? null
+                :
+                <Switch>
+                <Route path='/' exact component={ Login } />
+                <Route path='/logout' component={ Logout } />
+                <Route path='/home' component={ Home } />
+                <Route path='/add' component={ NewQuestion } />
+                <Route path='/questions/:id' component={ Questions } />
+                <Route component={ NotFoundPage } />
+              </Switch>
+
+            }
+          </div>
+        </BrowserRouter>
+    );
+  }
 }
 
-export default App;
+// function mapStateToProps({ authedUser }){
+//   return {
+//     loading: authedUser === null
+//   }
+// }
+
+export default connect()(App);
