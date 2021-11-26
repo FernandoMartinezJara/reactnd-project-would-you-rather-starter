@@ -27,11 +27,16 @@ class App extends Component {
   }
 
   render(){
+
+      const authedUser = localStorage.getItem('authedUser');
+      
       return (
 
         <BrowserRouter>
           <LoadingBar />
-          <NavMenu />
+          
+          { !!authedUser && <NavMenu /> }
+
           <div style={styles}>
             {
               this.props.loading === true 
@@ -55,7 +60,7 @@ class App extends Component {
 
 // function mapStateToProps({ authedUser }){
 //   return {
-//     loading: authedUser === null
+//     authedUser
 //   }
 // }
 

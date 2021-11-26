@@ -21,6 +21,8 @@ class Login extends Component {
     e.preventDefault();
     const { text } = this.state;
     const { dispatch, id } = this.props;
+    
+    localStorage.setItem('authedUser', text);
 
     dispatch(handleAuthedUser(text))
 
