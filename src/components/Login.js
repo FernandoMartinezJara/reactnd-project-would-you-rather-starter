@@ -42,7 +42,7 @@ class Login extends Component {
       const { toHome, text } = this.state;
 
       if(toHome === true){
-        return <Redirect to='/home' />
+        return <Redirect to='/dashboard' />
       }
 
       return(
@@ -66,13 +66,13 @@ class Login extends Component {
                             value={text}
                             placeholder="Select User"
                             data={
-                              this.props.authedUser &&
-                              Object.keys(this.props.authedUser).map(userId =>(
-                                {
-                                  label: this.props.authedUser[userId].name,
-                                  value: userId,
-                                  role: "master"
-                                })) 
+                              this.props.users &&
+                                Object.keys(this.props.users).map(userId =>(
+                                  {
+                                    label: this.props.users[userId].name,
+                                    value: userId,
+                                    role: "master"
+                                  })) 
                             }
                             cleanable={false}
                             onChange={this.handleOnChange} />
@@ -97,9 +97,9 @@ class Login extends Component {
 }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ users }) {
   return {
-      authedUser
+      users
   }
 }
 

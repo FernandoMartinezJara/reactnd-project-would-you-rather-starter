@@ -51,7 +51,7 @@ class NewQuestion extends Component {
         const { toHome } = this.state
 
         if(toHome === true){
-          return <Redirect to='/home' />
+          return <Redirect to='/dashboard' />
         }
 
         const { optionOneText, optionTwoText } = this.state
@@ -104,7 +104,7 @@ class NewQuestion extends Component {
     }
 }
 
-function mapStateToProps(state, { authedUser }) {
+function mapStateToProps({ authedUser }) {
   return {
       authedUser
   }

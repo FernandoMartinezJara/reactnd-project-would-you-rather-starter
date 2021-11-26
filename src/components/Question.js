@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Panel,FlexboxGrid, Divider, Button } from 'rsuite';
-import Logo from '../icons/logo.svg';
 import { Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -25,21 +24,12 @@ class Question extends Component {
       
       const { question, user, id  } = this.props;
 
-      //if(!user || !id) return null //validar spread en reducer para user o id
+      if(!question || !user)
+        return null
 
-      if(!question)
-        return(
-          <FlexboxGrid justify='center' style={{ marginTop:10 }}>
-            <FlexboxGrid.Item colspan={24}>
-              <Panel shaded style={{ textAlign:"center" }}>
-                <h3>Loading...</h3>
-              </Panel>
-            </FlexboxGrid.Item>
-          </FlexboxGrid>
-        )
-        
-      const name = user ? user.name : ''
-      const optionOne = question ? question.optionOne.text : question.optionTwo.text
+      const name = user ? user.name : '';
+      const avatarURL = user ? user.avatarURL : '';
+      const optionOne = question ? question.optionOne?.text : '';
 
       return(
         <FlexboxGrid justify='start' style={{ marginTop:10 }}>
@@ -47,7 +37,7 @@ class Question extends Component {
             <Panel header={`${ name } Asked: `} shaded style={{ textAlign:"start" }}>
                 <FlexboxGrid>
                     <FlexboxGrid.Item colspan={8}>
-                        <img src={ Logo } style={{ width:100 }} className='notFound' alt=""></img>
+                        <img src={ avatarURL } style={{ width:100 }} className='notFound' alt=""></img>
                     </FlexboxGrid.Item>
 
                     <FlexboxGrid.Item colspan={4}>
@@ -81,10 +71,9 @@ class Question extends Component {
 }
 }
 
-function mapStateToProps({ question: questions, authedUser },{ id }) {
-  
+function mapStateToProps({ question: questions, users },{ id }) {
   const question = questions[id];
-  const user = question ? authedUser[question.author] : null;
+  const user = question ? users[question.author] : null;
 
   return {
     id,

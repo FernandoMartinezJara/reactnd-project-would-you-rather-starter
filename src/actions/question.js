@@ -1,3 +1,4 @@
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import { _saveQuestion } from '../utils/_DATA';
 
 export const ADD_QUESTION = "ADD_QUESTION";
@@ -19,15 +20,17 @@ export function getQuestions(questions){
 
 export function handleAddQuestion(optionOneText, optionTwoText, author='tylermcginnis'){
     return(dispatch) => {
+
+        dispatch(showLoading());
+
         const question = {
             optionOneText,
             optionTwoText,
             author
         };
 
-        console.log(question)
-
         return _saveQuestion(question)
             .then((q) => dispatch(addQuestion(q)))
+            .then(() => dispatch(hideLoading()))
     }
 }

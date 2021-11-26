@@ -1,5 +1,5 @@
 import { BrowserRouter,Switch, Route } from 'react-router-dom';
-import { NavMenu } from './NavMenu';
+import NavMenu from './NavMenu';
 // import Routes from './Routes';
 import { connect } from 'react-redux';
 import "rsuite/dist/rsuite.min.css";
@@ -8,7 +8,7 @@ import LoadingBar from 'react-redux-loading-bar';
 import { handleInitData } from '../actions/shared';
 
 
-import Home  from './Home';
+import Dashboard  from './Dashboard';
 import NewQuestion from './NewQuestion';
 import Logout from './Logout';
 // import { LeaderBoard } from './LeaderBoard';
@@ -40,7 +40,7 @@ class App extends Component {
                 <Switch>
                 <Route path='/' exact component={ Login } />
                 <Route path='/logout' component={ Logout } />
-                <Route path='/home' component={ Home } />
+                <Route path='/dashboard' component={ Dashboard } />
                 <Route path='/add' component={ NewQuestion } />
                 <Route path='/questions/:id' component={ Questions } />
                 <Route component={ NotFoundPage } />

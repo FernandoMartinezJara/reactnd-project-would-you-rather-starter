@@ -1,6 +1,6 @@
 import { hideLoading, showLoading } from "react-redux-loading-bar";
 import { getInitData } from "../utils/api";
-import { getAuthedUsers } from "./authedUser";
+import { getAuthedUsers } from "./users";
 import { getQuestions } from "./question";
 
  export function handleInitData() {
