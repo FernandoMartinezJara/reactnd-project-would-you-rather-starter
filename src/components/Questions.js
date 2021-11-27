@@ -3,6 +3,7 @@ import { Panel,FlexboxGrid, Divider, Button, Form, RadioGroup, Radio } from 'rsu
 import Logo from '../icons/logo.svg';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import './app.css';
  
 class Questions extends Component {
 
@@ -21,7 +22,7 @@ class Questions extends Component {
 
       const { question, user } = this.props;
 
-      if(!question || !user)
+      if(!question)
         return(
           <FlexboxGrid justify='center' style={{ marginTop:10 }}>
             <FlexboxGrid.Item colspan={24}>
@@ -33,7 +34,7 @@ class Questions extends Component {
         )
 
       const { optionOne, optionTwo } = question
-      const { name } = user;
+      const name = !!user ? user.name : '';
 
       return(
         <FlexboxGrid justify='center' style={{ marginTop:10 }}>
@@ -42,15 +43,11 @@ class Questions extends Component {
               <Panel header={`${ name } Asked: `} shaded style={{ textAlign:"start" }}>
                 <FlexboxGrid>
                     
-                    <FlexboxGrid.Item colspan={8}>
-                        <img src={ Logo } style={{ width:200 }} className='notFound' alt=""></img>
+                    <FlexboxGrid.Item colspan={10} style={{ justifyContent: 'center' }}>
+                        <img src={ Logo } style={{ width:150, verticalAlign:'center', alignContent:'center' }} className='notFound' alt=""></img>
                     </FlexboxGrid.Item>
 
-                    <FlexboxGrid.Item colspan={4}>
-                        <Divider vertical style={{ height: "100px", width: "1" }} />
-                    </FlexboxGrid.Item>
-
-                    <FlexboxGrid.Item colspan={12}>
+                    <FlexboxGrid.Item colspan={14} className='dividerFullHeigth'>
                         
                         <h4><b>Would you rather...</b></h4>
                         

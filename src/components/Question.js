@@ -32,20 +32,19 @@ class Question extends Component {
       const optionOne = question ? question.optionOne?.text : '';
 
       return(
+        
         <FlexboxGrid justify='start' style={{ marginTop:10 }}>
           <FlexboxGrid.Item colspan={24}>
             <Panel header={`${ name } Asked: `} shaded style={{ textAlign:"start" }}>
                 <FlexboxGrid>
-                    <FlexboxGrid.Item colspan={8}>
+                    <FlexboxGrid.Item colspan={10}>
                         <img src={ avatarURL } style={{ width:100 }} className='notFound' alt=""></img>
                     </FlexboxGrid.Item>
 
-                    <FlexboxGrid.Item colspan={4}>
-                        <Divider vertical style={{ height: "100px", width: "1" }} />
-                    </FlexboxGrid.Item>
+                    <FlexboxGrid.Item colspan={14} >
+                      <div className='dividerFullHeigth'>
 
-                    <FlexboxGrid.Item colspan={12}>
-                        <p>
+                      <p>
                             <b>Would you rather</b>
                         </p>
                         <p>
@@ -60,6 +59,9 @@ class Question extends Component {
                                     View Poll
                             </Button>
                         </p>
+
+                      </div>
+
 
                     </FlexboxGrid.Item>
                 </FlexboxGrid>
