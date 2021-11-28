@@ -1,8 +1,9 @@
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
-import { _saveQuestion } from '../utils/_DATA';
+import { _saveQuestion, _saveQuestionAnswer } from '../utils/_DATA';
 
 export const ADD_QUESTION = "ADD_QUESTION";
 export const GET_QUESTIONS = "GET_QUESTIONS";
+export const SAVE_QUESTION_ANSWER = "SAVE_QUESTION_ANSWER";
 
 export function addQuestion(question){
     return {
@@ -18,6 +19,15 @@ export function getQuestions(questions){
     }
 }
 
+export function saveQuestionAnswer({authedUser, qid, answer}){
+    return {
+        type: SAVE_QUESTION_ANSWER,
+        authedUser,
+        qid,
+        answer
+    }
+}
+//TODO: no setear author
 export function handleAddQuestion(optionOneText, optionTwoText, author='tylermcginnis'){
     return(dispatch) => {
 
@@ -33,4 +43,14 @@ export function handleAddQuestion(optionOneText, optionTwoText, author='tylermcg
             .then((q) => dispatch(addQuestion(q)))
             .then(() => dispatch(hideLoading()))
     }
+}
+
+
+export function handleSaveQuestionAnswer(authedUser, qid, answer){
+    return (dispatch) => {
+        return _saveQuestionAnswer({authedUser, qid, answer})
+            .then((q) => dispatch(saveQuestionAnswer({ authedUser, qid, answer })))
+        
+    }
+
 }

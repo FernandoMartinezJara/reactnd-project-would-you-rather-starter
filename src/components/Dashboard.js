@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 import { Nav, FlexboxGrid, Panel } from 'rsuite';
 import { handleSetQuestionFilter } from '../actions/questionFilter';
 import Question from './Question';
@@ -14,7 +15,10 @@ class Dashboard extends Component {
 
     render(){
 
-        const {questionFilter} = this.props;
+        const { questions, questionFilter, authedUser } = this.props;
+
+        if(authedUser === '')
+            return <Redirect to={"/"} />
 
         return (
 
@@ -26,9 +30,9 @@ class Dashboard extends Component {
                     </Nav>
                     <Panel shaded style={{ textAlign:'center', width:"100%"}}>
                         {
-                            this.props.questions
+                            questions
                                 ?
-                                this.props.questions.map((id) =>(
+                                questions.map((id) =>(
                                     <Question 
                                         key={id} 
                                         id={ id }/>
@@ -43,7 +47,7 @@ class Dashboard extends Component {
     }
 }
 
-function mapStateToProps({ question, questionFilter, users, authedUser }){
+function mapStateToProps({ question, questionFilter, authedUser }){
 
     const _questions = Object.keys(question)
         .sort((a,b) => question[b].timestamp - question[a].timestamp)
@@ -67,7 +71,8 @@ function mapStateToProps({ question, questionFilter, users, authedUser }){
 
     return {
         questions: quest,
-        questionFilter
+        questionFilter,
+        authedUser
     }
 }
 

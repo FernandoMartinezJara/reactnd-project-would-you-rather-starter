@@ -2,6 +2,7 @@ import { hideLoading, showLoading } from "react-redux-loading-bar";
 import { getInitData } from "../utils/api";
 import { getAuthedUsers } from "./users";
 import { getQuestions } from "./question";
+import { setAuthedUser } from "./authedUser";
 
  export function handleInitData() {
      return(dispatch) => {
@@ -9,9 +10,12 @@ import { getQuestions } from "./question";
 
          return getInitData()
             .then(({ users, questions }) => {
-                    dispatch(getAuthedUsers(users));
-                    dispatch(getQuestions(questions));
-                    dispatch(hideLoading());
-                });
+                const authedUser = localStorage.getItem('authedUser')?.toString();
+                authedUser !== '' && !!authedUser && dispatch(setAuthedUser(authedUser))
+
+                dispatch(getAuthedUsers(users));
+                dispatch(getQuestions(questions));
+                dispatch(hideLoading());
+            });
      }
  }

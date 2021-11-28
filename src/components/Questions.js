@@ -1,26 +1,42 @@
 import React, { Component } from 'react';
-import { Panel,FlexboxGrid, Divider, Button, Form, RadioGroup, Radio } from 'rsuite';
+import { Panel,FlexboxGrid, Button, RadioGroup, Radio } from 'rsuite';
 import Logo from '../icons/logo.svg';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './app.css';
+import { handleSaveQuestionAnswer } from '../actions/question';
  
 class Questions extends Component {
 
   state = {
-    text: '',
-    toHome: false
+    radioSelected: '',
+    toResults: false
   };
+
+  handleSubmit(e){
+    e.preventDefault();
+    
+    const { dispatch, question, authedUser } = this.props;
+
+    const { radioSelected } = this.state;
+
+    dispatch(handleSaveQuestionAnswer(authedUser, question.id, radioSelected))
+
+    this.setState({
+      toResults: true
+    })
+  }
+
+  handleSelectAnswer(radioSelected){
+    this.setState({
+      radioSelected
+    })
+  }
 
     render() {
 
-      const { toHome } = this.state;
-
-      if(toHome === true){
-        return <Redirect to='/home' />
-      }
-
-      const { question, user } = this.props;
+      const { toResults, radioSelected } = this.state;
+      const { question, user, authedUser } = this.props;
 
       if(!question)
         return(
@@ -32,8 +48,14 @@ class Questions extends Component {
             </FlexboxGrid.Item>
           </FlexboxGrid>
         )
-
+      
       const { optionOne, optionTwo } = question
+      const answeredPoll = optionOne.votes.includes(authedUser) || optionTwo.votes.includes(authedUser);
+
+      if(toResults === true || answeredPoll ){
+        return <Redirect to={`/results/${question.id}`} />
+      }
+
       const name = !!user ? user.name : '';
 
       return(
@@ -50,20 +72,24 @@ class Questions extends Component {
                     <FlexboxGrid.Item colspan={14} className='dividerFullHeigth'>
                         
                         <h4><b>Would you rather...</b></h4>
-                        
-                        <Form.Group controlId="radioList">
-                          <RadioGroup name="radioList">
-                            <Radio value={ optionOne.text }>{ optionOne.text }</Radio>
-                            <Radio value={ optionTwo.text }>{ optionTwo.text }</Radio>
+                        <form onSubmit={(e) => this.handleSubmit(e)}>
+                          <RadioGroup 
+                            name="radioList"
+                            value={ radioSelected } 
+                            onChange={ (e) => this.handleSelectAnswer(e)}>
+                            <Radio value='optionOne'> { optionOne.text } </Radio>
+                            <Radio value='optionTwo'> { optionTwo.text } </Radio>
                           </RadioGroup>
-                        </Form.Group>
-                        
-                        <Button
-                            style={{ marginTop: 30 }}
-                            type='submit'
-                            appearance="ghost" block>
-                                Submit
-                        </Button>
+
+                          <Button
+                              style={{ marginTop: 30 }}
+                              type='submit'
+                              appearance="ghost" 
+                              block
+                              disabled={ radioSelected === '' }>
+                                  Submit
+                          </Button>
+                        </form>
                       
                     </FlexboxGrid.Item>
                 </FlexboxGrid>
@@ -75,14 +101,17 @@ class Questions extends Component {
 }
 }
 
-function mapStateToProps({question: questions, authedUser: authedUsers}, props) {
+function mapStateToProps({question: questions, users, authedUser}, props) {
+
+
   const { id } = props.match.params;
   const question = id ? questions[id] : null
-  const user = question ? authedUsers[question.author] : null
+  const user = question ? users[question.author] : null
 
   return {
     question,
-    user
+    user,
+    authedUser
   }
 }
 

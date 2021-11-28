@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Panel,FlexboxGrid, Divider, Button } from 'rsuite';
+import { Panel,FlexboxGrid, Button } from 'rsuite';
 import { Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 

@@ -17,6 +17,11 @@ class Login extends Component {
     toHome: false
   };
 
+  componentDidMount(){
+    const { dispatch } = this.props;
+    dispatch(handleAuthedUser(''))
+  }
+
   handleLogin = (e) => {
     e.preventDefault();
     const { text } = this.state;
@@ -27,7 +32,6 @@ class Login extends Component {
     dispatch(handleAuthedUser(text))
 
     this.setState(() => ({
-        text: '',
         toHome: id ? false : true
     }));
   }
@@ -99,9 +103,11 @@ class Login extends Component {
 }
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ users, authedUser }) {
+  // console.log('authedUser-LOGIN', authedUser)
   return {
-      users
+      users,
+      authedUser
   }
 }
 

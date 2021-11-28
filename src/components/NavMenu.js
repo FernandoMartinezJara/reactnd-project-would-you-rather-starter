@@ -21,6 +21,7 @@ class NavMenu extends Component {
         <Nav>
           <Nav.Item as={_NavLink} href="/dashboard">Home</Nav.Item>
           <Nav.Item as={_NavLink} href="/add">New Question</Nav.Item>
+          <Nav.Item as={_NavLink} href="/leaderboard">LeaderBoard</Nav.Item>
         </Nav>
 
         <Nav pullRight>
@@ -36,7 +37,8 @@ class NavMenu extends Component {
   }
 }
 
-function mapStateToProps({authedUser}){
+function mapStateToProps({ authedUser }){
+
   return {
     authedUser
   }
