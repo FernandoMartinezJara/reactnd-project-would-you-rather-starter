@@ -37,17 +37,9 @@ class Questions extends Component {
 
       const { toResults, radioSelected } = this.state;
       const { question, user, authedUser } = this.props;
-
+      
       if(!question)
-        return(
-          <FlexboxGrid justify='center' style={{ marginTop:10 }}>
-            <FlexboxGrid.Item colspan={24}>
-              <Panel shaded style={{ textAlign:"center" }}>
-                <h3>Loading...</h3>
-              </Panel>
-            </FlexboxGrid.Item>
-          </FlexboxGrid>
-        )
+        return <Redirect to='/error' />
       
       const { optionOne, optionTwo } = question
       const answeredPoll = optionOne.votes.includes(authedUser) || optionTwo.votes.includes(authedUser);
