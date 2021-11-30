@@ -104,7 +104,10 @@ class NewQuestion extends Component {
     }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ users, authedUser, question}) {
+  console.log(question)
+  console.log(users)
+
   return {
       authedUser
   }

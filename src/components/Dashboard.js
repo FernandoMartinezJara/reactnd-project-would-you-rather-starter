@@ -15,10 +15,7 @@ class Dashboard extends Component {
 
     render(){
 
-        const { questions, questionFilter, authedUser } = this.props;
-
-        if(authedUser === '')
-            return <Redirect to={"/"} />
+        const { questions, questionFilter } = this.props;
 
         return (
 

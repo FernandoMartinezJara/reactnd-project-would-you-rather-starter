@@ -6,9 +6,9 @@ export default function question(state = {}, action){
             return {
                 ...state,
                 [action.question.id]: action.question
-            };
+            }
         case GET_QUESTIONS:
-            
+
             return {
                 ...state,
                 ...action.questions

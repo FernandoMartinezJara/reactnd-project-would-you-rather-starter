@@ -30,6 +30,8 @@ class LeaderBoard extends Component  {
 }
 
 function mapStateToProps({ users }){
+
+    console.log(users)
     
     const _users = Object.keys(users)
         .sort((a, b) => 

@@ -27,8 +27,7 @@ export function saveQuestionAnswer({authedUser, qid, answer}){
         answer
     }
 }
-//TODO: no setear author
-export function handleAddQuestion(optionOneText, optionTwoText, author='tylermcginnis'){
+export function handleAddQuestion(optionOneText, optionTwoText, author){
     return(dispatch) => {
 
         dispatch(showLoading());
