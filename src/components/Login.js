@@ -48,7 +48,6 @@ class Login extends Component {
       const { toHome, text } = this.state;
 
       if(toHome === true){
-        localStorage.setItem('redirectFromStorage', 'true')
         let path = localStorage.getItem('path')?.toString()   
         
         if(!path || path === '/logout')

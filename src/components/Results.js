@@ -13,8 +13,6 @@ class Results extends Component {
 
     render() {
       
-      localStorage.setItem('redirectFromStorage', 'false')  
-      
       const { toHome } = this.state;
 
       if(toHome === true){

@@ -6,8 +6,6 @@ import Leader from './Leader';
 class LeaderBoard extends Component  {
     render(){
         
-        localStorage.setItem('redirectFromStorage', 'false')  
-        
         const { users } = this.props;
 
         return (

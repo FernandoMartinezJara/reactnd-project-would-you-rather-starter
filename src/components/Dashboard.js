@@ -13,8 +13,6 @@ class Dashboard extends Component {
     }
 
     render(){
-                      
-        localStorage.setItem('redirectFromStorage', 'false')  
 
         const { questions, questionFilter } = this.props;
 

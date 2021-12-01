@@ -10,12 +10,10 @@ class PrivateRoute extends Component{
         localStorage.setItem('path', location.pathname)      
         
         const isAutheduser =  localStorage.getItem('authedUser')
-
-        const redirectFromStorage = localStorage.getItem('redirectFromStorage')?.toString()
     
         return (
 
-            isAutheduser && redirectFromStorage === 'true'
+            !!isAutheduser
                 ? <Route {...rest} path={ path } component={  component } />
                 : <Redirect to="/" />
         )

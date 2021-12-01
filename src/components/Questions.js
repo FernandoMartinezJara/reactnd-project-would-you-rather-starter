@@ -35,8 +35,6 @@ class Questions extends Component {
 
     render() {
       
-      localStorage.setItem('redirectFromStorage', 'false')  
-      
       const { toResults, radioSelected } = this.state;
       const { question, user, authedUser } = this.props;
       
