@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
 import { Nav, FlexboxGrid, Panel } from 'rsuite';
 import { handleSetQuestionFilter } from '../actions/questionFilter';
 import Question from './Question';
+import { Redirect } from 'react-router-dom';
 
 class Dashboard extends Component {
+
+    componentDidMount(){
+            
+    }
 
      handleFilterQuestion(e){
         e.preventDefault();
@@ -14,6 +18,8 @@ class Dashboard extends Component {
     }
 
     render(){
+                      
+        localStorage.setItem('redirectFromStorage', 'false')  
 
         const { questions, questionFilter } = this.props;
 

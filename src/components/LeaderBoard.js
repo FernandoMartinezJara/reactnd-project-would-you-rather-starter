@@ -5,7 +5,9 @@ import Leader from './Leader';
 
 class LeaderBoard extends Component  {
     render(){
-
+        
+        localStorage.setItem('redirectFromStorage', 'false')  
+        
         const { users } = this.props;
 
         return (
@@ -30,8 +32,6 @@ class LeaderBoard extends Component  {
 }
 
 function mapStateToProps({ users }){
-
-    console.log(users)
     
     const _users = Object.keys(users)
         .sort((a, b) => 

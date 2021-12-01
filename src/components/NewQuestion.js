@@ -48,6 +48,9 @@ class NewQuestion extends Component {
     }
 
     render (){
+     
+        localStorage.setItem('redirectFromStorage', 'false')  
+
         const { toHome } = this.state
 
         if(toHome === true){
@@ -104,9 +107,7 @@ class NewQuestion extends Component {
     }
 }
 
-function mapStateToProps({ users, authedUser, question}) {
-  console.log(question)
-  console.log(users)
+function mapStateToProps({ authedUser}) {
 
   return {
       authedUser

@@ -48,7 +48,18 @@ class Login extends Component {
       const { toHome, text } = this.state;
 
       if(toHome === true){
-        return <Redirect to='/dashboard' />
+        localStorage.setItem('redirectFromStorage', 'true')
+        let path = localStorage.getItem('path')?.toString()   
+        console.log(path)
+        
+        if(!path || path === '/logout')
+        {
+          localStorage.setItem('path', '/dashboard')
+          path = '/dashboard'
+        }
+
+        console.log(path)
+        return <Redirect to={ path } />
       }
 
       return(
@@ -104,7 +115,6 @@ class Login extends Component {
 }
 
 function mapStateToProps({ users, authedUser }) {
-  // console.log('authedUser-LOGIN', authedUser)
   return {
       users,
       authedUser

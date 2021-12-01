@@ -17,6 +17,8 @@ class Question extends Component {
 
     render() {
 
+      
+
       const { toHome } = this.state;
       if(toHome === true){
         return <Redirect to='/home' />

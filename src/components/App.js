@@ -1,4 +1,4 @@
-import { BrowserRouter} from 'react-router-dom';
+import { BrowserRouter, Redirect } from 'react-router-dom';
 import NavMenu from './NavMenu';
 import { connect } from 'react-redux';
 import "rsuite/dist/rsuite.min.css";
@@ -19,9 +19,11 @@ class App extends Component {
 
   render(){
       const { loading, authedUser } = this.props;
+
       return (
 
         <BrowserRouter>
+
           <LoadingBar />
           
           { authedUser !== '' && <NavMenu /> }
