@@ -18,11 +18,15 @@ class LeaderBoard extends Component  {
                         {
                             users
                             &&  
-                                users.map((id, i ) =>(
+                                users.map((usr, i ) =>(
                                     <Leader 
-                                        key={id} 
-                                        position={i} 
-                                        id={ id }/>))
+                                        key={i} 
+                                        position={i + 1} 
+                                        name={usr.name}
+                                        avatarURL={usr.avatarURL}
+                                        nQuestions={usr.nQuestions}
+                                        nAnswers={usr.nAnswers} />
+                                    ))
                         }
                     </Panel>
                 </FlexboxGrid.Item>
@@ -31,12 +35,29 @@ class LeaderBoard extends Component  {
     }
 }
 
-function mapStateToProps({ users }){
-    
-    const _users = Object.keys(users)
-        .sort((a, b) => 
-            (Object.keys(users[b].answers).length - Object.keys(users[a].answers).length) + 
-            (users[b].questions.length - (users[a].questions.length )));
+function mapStateToProps({ users, question: questions }){
+
+    const _users =  Object.keys(users).map(usr => {
+
+        const nQuestions = Object.keys(questions)
+            .filter(q => questions[q].author === usr).length
+
+        const nAnswers = Object.keys(questions)
+            .filter(q => 
+                questions[q].optionOne.votes.includes(usr) || 
+                questions[q].optionTwo.votes.includes(usr) ).length
+
+            return {
+                name: users[usr].name,
+                avatarURL: users[usr].avatarURL,
+                nQuestions,
+                nAnswers
+            }
+    })
+    .sort((a, b) => 
+        (b.nQuestions - a.nQuestions) +
+        (b.nAnswers - a.nAnswers)
+    )
 
     return {
         users: _users

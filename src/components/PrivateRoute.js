@@ -7,7 +7,6 @@ class PrivateRoute extends Component{
 
         const { path, component, location, ...rest } = this.props
         
-        console.log(location)
         localStorage.setItem('path', location.pathname)      
         
         const isAutheduser =  localStorage.getItem('authedUser')

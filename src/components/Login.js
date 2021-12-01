@@ -50,7 +50,6 @@ class Login extends Component {
       if(toHome === true){
         localStorage.setItem('redirectFromStorage', 'true')
         let path = localStorage.getItem('path')?.toString()   
-        console.log(path)
         
         if(!path || path === '/logout')
         {
@@ -58,7 +57,6 @@ class Login extends Component {
           path = '/dashboard'
         }
 
-        console.log(path)
         return <Redirect to={ path } />
       }
 

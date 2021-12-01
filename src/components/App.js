@@ -1,4 +1,4 @@
-import { BrowserRouter, Redirect } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import NavMenu from './NavMenu';
 import { connect } from 'react-redux';
 import "rsuite/dist/rsuite.min.css";

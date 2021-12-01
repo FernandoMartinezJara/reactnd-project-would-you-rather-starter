@@ -1,33 +1,11 @@
 import React, { Component } from 'react';
 import { Panel,FlexboxGrid, Avatar, Badge} from 'rsuite';
-import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 class Leader extends Component {
 
-  state = {
-    text: '',
-    toHome: false
-  };
-
-  toDetail = (e, id) => {
-    e.preventDefault();
-    this.props.history.push(`/questions/${id}`)
-  }
-
     render() {
-
-      const { toHome } = this.state;
       
-      if(toHome === true){
-        return <Redirect to='/home' />
-      }
-      
-      const { user, position  } = this.props;
-      const { name, questions, answers } = user;
-      const avatarURL = user ? user.avatarURL : '';
-      const nQuestions = questions.length;
-      const nAnswers = Object.keys(answers).length;
+      const { avatarURL, name, position, nQuestions, nAnswers } = this.props;
       const score = nQuestions + nAnswers;
       
       return(
@@ -76,14 +54,5 @@ class Leader extends Component {
 }
 }
 
-function mapStateToProps({ users },{ id, position }) {
-  const user = users ? users[id] : null;
-
-  return {
-    user,
-    position: position + 1
-  }
-}
-
-export default connect(mapStateToProps)(Leader)
+export default Leader
 
