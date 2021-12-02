@@ -9,7 +9,7 @@ class PrivateRoute extends Component{
         
         localStorage.setItem('path', location.pathname)      
         
-        const isAutheduser =  localStorage.getItem('authedUser')
+        const isAutheduser =  sessionStorage.getItem('authedUser')
     
         return (
 

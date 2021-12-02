@@ -18,15 +18,15 @@ class App extends Component {
   }
 
   render(){
-      const { loading, authedUser } = this.props;
+      const { loading } = this.props;
 
       return (
 
         <BrowserRouter>
 
           <LoadingBar />
-          
-          { authedUser !== '' && <NavMenu /> }
+
+          <NavMenu />
 
           <div style={styles}>
             {
@@ -35,6 +35,7 @@ class App extends Component {
                 : <Routes/>
             }
           </div>
+
         </BrowserRouter>
     );
   }

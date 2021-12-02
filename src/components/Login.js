@@ -17,17 +17,13 @@ class Login extends Component {
     toHome: false
   };
 
-  componentDidMount(){
-    const { dispatch } = this.props;
-    dispatch(handleAuthedUser(''))
-  }
-
   handleLogin = (e) => {
     e.preventDefault();
+
     const { text } = this.state;
     const { dispatch, id } = this.props;
     
-    localStorage.setItem('authedUser', text);
+    sessionStorage.setItem('authedUser', text);
 
     dispatch(handleAuthedUser(text))
 

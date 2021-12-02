@@ -10,7 +10,7 @@ import { setAuthedUser } from "./authedUser";
 
          return getInitData()
             .then(({ users, questions }) => {
-                const authedUser = localStorage.getItem('authedUser')?.toString();
+                const authedUser = sessionStorage.getItem('authedUser')?.toString();
                 authedUser !== '' && !!authedUser && dispatch(setAuthedUser(authedUser))
 
                 dispatch(getAuthedUsers(users));
